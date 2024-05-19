@@ -1,0 +1,30 @@
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Delete Account</h1>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" th:action="@{/account/delete}" th:object="${account}" method="post" >
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="ID" aria-label="id"
+                               aria-describedby="basic-addon1" th:field="*{id}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Branch" aria-label="branch"
+                               aria-describedby="basic-addon1" th:field="*{branch}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Balance" aria-label="balance"
+                               aria-describedby="basic-addon1" th:field="*{balance}" readonly>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='/W6/sbweb/templates/account/index.html'">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<style>
+    table, th, td {
+        padding: 5px;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+<body>
+<h1>Customers</h1>
+
+<button onclick="location.href='/customer/add'">Add</button>
+<br><br>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c:${customerList}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.address}"></td>
+        <td>
+            <a th:href="@{/customer/update/{c.id}(c.id=${c.id})}" >Update</a>
+            <a href=# th:onclick="'javascript:Delete('+${c.id}+');'">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function Delete(id) {
+        if (!confirm("The selected user will be deleted! \nAre you sure?")) return;
+        $.ajax({
+            url: '/customer/delete/'+id,
+            type: 'post',
+            data: {'uid': id},
+            success: function (data) {
+                //alert("Ok");
+                window.location.replace("customer");
+            },
+            error: function (r) {
+                alert("Problem");
+            }
+        });
+    }
+</script>
+</body>
+</html>

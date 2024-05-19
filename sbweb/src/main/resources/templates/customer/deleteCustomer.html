@@ -1,0 +1,34 @@
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Delete Customer</h1>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" th:action="@{/customer/delete}" th:object="${customer}" method="post" >
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="ID" aria-label="id"
+                               aria-describedby="basic-addon1" th:field="*{id}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Name" aria-label="name"
+                               aria-describedby="basic-addon1" th:field="*{name}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Address" aria-label="address"
+                               aria-describedby="basic-addon1" th:field="*{address}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="City" aria-label="city"
+                               aria-describedby="basic-addon1" th:field="*{city}" readonly>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <!-- Close button redirects to the customers page -->
+                        <button type="button" class="btn btn-secondary" onclick="location.href='/W6/sbweb/templates/customer/index.html'">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

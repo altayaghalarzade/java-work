@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Account</title>
+</head>
+<body>
+<h1>Edit Account</h1>
+<form th:action="@{/account/add}" th:object=${account} method="post">
+    <fieldset>
+        <legend>Account</legend>
+        <div>
+            <label htmlFor="aid">Id: </label>
+            <input type="text" id="aid" th:field="*{id}" />
+        </div>
+        <div>
+            <label htmlFor="branch">Branch: </label>
+            <input type="text" id="branch" th:field="*{branch}" />
+        </div>
+        <div>
+            <label htmlFor="balance">Balance: </label>
+            <input type="text" id="balance" th:field="*{balance}" />
+        </div>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>

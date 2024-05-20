@@ -29,13 +29,16 @@
         <td th:text="${a.branch}"></td>
         <td th:text="${a.balance}"></td>
         <td>
+
             <button th:onclick="'javascript:Delete('+${a.id}+');'">Delete</button>
+            <a th:href="@{/account/update/{a.id}(a.id=${a.id})}" >Update</a>
 
         </td>
     </tr>
 
     </tbody>
 </table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     function Delete(id) {
         if (!confirm("The selected user will be deleted! \nAre you sure?")) return;

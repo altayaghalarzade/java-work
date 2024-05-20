@@ -1,10 +1,8 @@
 package org.sau.sbweb.controllers;
 
-
 import org.sau.sbweb.models.Account;
 import org.sau.sbweb.models.Customer;
 import org.sau.sbweb.models.Depositor;
-import org.sau.sbweb.models.DepositorViewModel;
 import org.sau.sbweb.repositories.AccountRepository;
 import org.sau.sbweb.repositories.CustomerRepository;
 import org.sau.sbweb.repositories.DepositorRepository;
@@ -33,33 +31,17 @@ public class DepositorController {
 
     @GetMapping("/depositors")
     public String getIndex(Model model) {
-        Iterable<Depositor> depositorList = depositorRepository.findAll();
-        List<DepositorViewModel> dvList = new ArrayList<>();
-
-        for (Depositor depositor : depositorList) {
-            Customer customer = depositor.getCustomer(); // Accessing customer directly from Depositor
-            Account account = depositor.getAccount(); // Accessing account directly from Depositor
-
-            // Creating a new instance of DepositorViewModel using the accessed properties
-            dvList.add(new DepositorViewModel(
-                    depositor.getId(),
-                    customer != null ? customer.getName() : "Unknown", // Handling null customer case
-                    account != null ? account.getBranch() : "Unknown", // Handling null account case
-                    account != null ? account.getBalance() : 0.0, // Handling null account case
-                    depositor.getDate(),
-                    depositor.getAmmount()
-            ));
-        }
-
-        model.addAttribute("dvList", dvList);
+        List<Depositor> depositorList = depositorRepository.findAll();
+        model.addAttribute("depositorList", depositorList);
         return "depositor/index";
     }
-
 
     @GetMapping("/depositor/add")
     public String addDepositor(Model model) {
         Depositor depositor = new Depositor();
         model.addAttribute("depositor", depositor);
+        model.addAttribute("customers", customerRepository.findAll());
+        model.addAttribute("accounts", accountRepository.findAll());
         return "depositor/add";
     }
 
@@ -70,7 +52,7 @@ public class DepositorController {
     }
 
     @GetMapping("/depositor/update/{id}")
-    public String updateDepositor(@PathVariable int id, Model model) {
+    public String updateDepositor(@PathVariable Long id, Model model) { // Long id kullan
         Optional<Depositor> depositor = depositorRepository.findById(id);
         model.addAttribute("depositor", depositor.orElse(null));
         return "depositor/update";
@@ -83,7 +65,7 @@ public class DepositorController {
     }
 
     @PostMapping("/depositor/delete/{id}")
-    public String depositorDelete(@PathVariable int id) {
+    public String depositorDelete(@PathVariable Long id) { // Long id kullan
         depositorRepository.deleteById(id);
         return "redirect:/depositors";
     }

@@ -1,6 +1,7 @@
 package org.sau.sbweb.controllers;
 
 import org.sau.sbweb.models.Account;
+import org.sau.sbweb.models.Customer;
 import org.sau.sbweb.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,9 +42,10 @@ public class AccountController {
         return "redirect:/account";
     }
 
-    @GetMapping("/account/update/{aid}")
-    public String updateAccount(@PathVariable int aid, Model model){
-        Optional<Account> account = accountRepository.findById(aid);
+
+    @GetMapping("/account/update/{id}")
+    public String updateAccount(@PathVariable int id, Model model){
+        Optional<Account> account = accountRepository.findById(id);
         model.addAttribute("account", account);
         return "account/updateAccount";
     }
@@ -53,6 +55,15 @@ public class AccountController {
         accountRepository.save(account);
         return "redirect:/account";
     }
+
+
+
+
+
+
+
+
+
 
 
 

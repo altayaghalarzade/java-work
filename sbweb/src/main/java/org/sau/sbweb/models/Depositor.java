@@ -5,23 +5,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name="depositor")
+@Table(name = "depositor")
 public class Depositor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name = "ammount")
-    private Double ammount;
+    @Column(name = "amount")
+    private BigDecimal amount;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -30,6 +31,4 @@ public class Depositor {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
-
-   
 }

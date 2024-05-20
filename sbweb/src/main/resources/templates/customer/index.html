@@ -31,6 +31,7 @@
         <td th:text="${c.name}"></td>
         <td th:text="${c.address}"></td>
         <td>
+
             <a th:href="@{/customer/update/{c.id}(c.id=${c.id})}" >Update</a>
             <a href=# th:onclick="'javascript:Delete('+${c.id}+');'">Delete</a>
         </td>
